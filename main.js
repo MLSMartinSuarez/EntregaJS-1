@@ -2,11 +2,50 @@
 
 alert("sistema de ingreso de alumnos, con sus correspondientes notas y dando una devolucion segun la misma")
 
-for(let alumnos = 1; alumnos <= 3; alumnos++){
-    let nombre = prompt("Ingrese el nombre del alumno");
-    let nota = Number(prompt (`nota del examen de ${nombre} (un numero del 1 al 10 tal como figura en el examen)`));
+while (true) {
 
-    if(nota <=3 ){
+    let nombre = prompt("Ingrese el nombre del alumno");
+    let notaExamen = validarDatos(nombre)
+
+    if (notaExamen != 0 && notaExamen <= 10){
+        entregarNotas(nombre , notaExamen);
+    } else {
+        alert('error');
+    }
+
+    confirmacion = prompt('¿Quieres continuar? Presione OK para continuar o CANCEL para salir')
+
+        if(confirmacion == null){
+
+        alert('Gracias por usar nuestro sistema de calificacion');
+
+        break
+        }
+    
+}
+
+function validarDatos(nombre) {
+
+    do {
+        
+        let nota = parseInt(prompt (`nota del examen de ${nombre} (un numero del 1 al 10 tal como figura en el examen)`));
+
+        if (isNaN(nota)) {
+
+            alert('No ingresaste un numero, por favor ingrese un numero del 1 a al 10')
+
+        } else if (nota > 0 && nota <= 10) {
+
+            return nota
+        } 
+
+    } while (true);
+    
+    } 
+
+function entregarNotas (nombre, nota) {
+
+    if( nota <= 3 ){
         alert(`${nombre} la nota de ${nota} es desaprobado sin recuperatorio`);
     } 
     else if (nota < 6){
@@ -21,7 +60,5 @@ for(let alumnos = 1; alumnos <= 3; alumnos++){
     else{
         alert(`hubo un problema a la hora de insertar la nota de ${nombre}, por favor la nota del examen debe ser un numero de 1 al 10`);
     }
-
 }
 
-alert("notas entregadas");
