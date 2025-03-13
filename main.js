@@ -5,10 +5,9 @@ alert("sistema de ingreso de alumnos, con sus correspondientes notas y dando una
 while (true) {
 
     let nombre = prompt("Ingrese el nombre del alumno");
-    let notaExamen = validarDatos(nombre)
 
-    if (notaExamen != 0 && notaExamen <= 10){
-        entregarNotas(nombre , notaExamen);
+    if (nombre){
+        validarDatos(nombre);
     } else {
         alert('error');
     }
@@ -26,39 +25,30 @@ while (true) {
 
 function validarDatos(nombre) {
 
-    do {
-        
+    
         let nota = parseInt(prompt (`nota del examen de ${nombre} (un numero del 1 al 10 tal como figura en el examen)`));
 
-        if (isNaN(nota)) {
+        if (isNaN(nota) && nota > 0 && nota <= 10 ) {
 
             alert('No ingresaste un numero, por favor ingrese un numero del 1 a al 10')
 
-        } else if (nota > 0 && nota <= 10) {
-
-            return nota
+        } else if( nota <= 3 ){
+            alert(`${nombre} la nota de ${nota} es desaprobado sin recuperatorio`);
         } 
+        else if (nota < 6){
+            alert(`${nombre} la nota de ${nota} es desaprobado con posibilidad de recuperatorio`);
+        }
+        else if (nota < 10){
+            alert(`${nombre} la nota de ${nota} es aprobado, buen trabajo`);
+        }
+        else if (nota === 10){
+            alert(`${nombre} la nota de ${nota} es sobresaliente, felicidades`);
+        }
+        else{
+            alert(`hubo un problema a la hora de insertar la nota de ${nombre}, por favor la nota del examen debe ser un numero de 1 al 10`);
+        }
+        
 
-    } while (true);
-    
     } 
 
-function entregarNotas (nombre, nota) {
-
-    if( nota <= 3 ){
-        alert(`${nombre} la nota de ${nota} es desaprobado sin recuperatorio`);
-    } 
-    else if (nota < 6){
-        alert(`${nombre} la nota de ${nota} es desaprobado con posibilidad de recuperatorio`);
-    }
-    else if (nota < 10){
-        alert(`${nombre} la nota de ${nota} es aprobado, buen trabajo`);
-    }
-    else if (nota = 10){
-        alert(`${nombre} la nota de ${nota} es sobresaliente, felicidades`);
-    }
-    else{
-        alert(`hubo un problema a la hora de insertar la nota de ${nombre}, por favor la nota del examen debe ser un numero de 1 al 10`);
-    }
-}
 
